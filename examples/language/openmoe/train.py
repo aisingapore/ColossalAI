@@ -367,8 +367,10 @@ def main():
                     apply_load_balance(model, optimizer)
                 # save ckeckpoint
                 if (step + 1) % args.save_interval == 0:
-                    coordinator.print_on_master(f"Saving model checkpoint to {args.output_path}")
-                    booster.save_model(model, args.output_path, shard=True)
+                    folder_name = "_".join(["iter",str(step+1)])
+                    output_path = "/".join([args.output_path, folder_name])
+                    coordinator.print_on_master(f"Saving model checkpoint to {output_path}")
+                    booster.save_model(model, output_path, shard=True)
 
         # save checkpoint at the end of each epochs
         booster.save_model(model, args.output_path, shard=True)
