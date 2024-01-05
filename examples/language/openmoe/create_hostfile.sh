@@ -10,17 +10,16 @@ fi
 
 touch hostfile
 
+echo "Creating hostfile..."
+
 # Extract ranges from the input using parameter expansion
 ranges="${input##*[}"
 ranges="${ranges%]*}"
+echo "Ranges:${ranges}"
 
-
-echo "Range:${ranges}"
-# Split the input into prefix and suffix
+# Grab prefix
 prefix="${input%%[*}"
-suffix="${input##*]}"
-
-echo "prefix:${prefix}, suffix:${suffix}"
+echo "Prefix:${prefix}"
 
 # Loop through each range and generate the output
 IFS=',' read -ra range_array <<< "$ranges"
